@@ -9,10 +9,77 @@ Original file is located at
 
 import streamlit as st
 import random
+import pandas as pd
 
+st.set_page_config(layout="wide")
 st.title('Streamlit!')
 st.write('Hello World!')
+
+st.sidebar.title('Filter')
+st.sidebar.header('Option')
+st.sidebar.selectbox(
+    "Please select!",
+    ['1','2','3'],
+)
+
+with st.sidebar:
+    st.radio(
+        "Please select one!",
+        ['11','22','33'],
+    )
+
+df = pd.DataFrame(
+    {
+        "first column": [1,2,3,4],
+        "second column": [10,20,30,40]
+    }
+)
+
+st.write("1+1=",2)
+st.write(df)
+
+con1 = st.container()
+for col in con1.columns([1,2,3,4], border=True):
+    col.write("Hello World!")
+
+
+
+
 
 if st.button('Generate Random Number'):
     random_number = random.randint(1, 100)
     st.write(f'Random Number: {random_number}')
+
+username_input = st.text_input(
+    "Username: ",
+    value="???????"
+)
+
+password_input = st.text_input(
+    "Password: ",
+    type="password",
+    placeholder= "Please give a password"
+
+)
+
+st.write(username_input,password_input)
+
+txt = st.text_area(
+    "Text to analyze",
+    "Management of analytics and data tech"
+)
+
+
+
+number = st.number_input(
+    "Insert a number",
+    min_value=0,
+    max_value=10,
+    value=5,
+    step=1,
+    format="%0.1f"
+)
+st.write("The current number is",number)
+
+score = st.slider("Select Score",0.0,100.0,75.0)
+st.write("Score:",score)
